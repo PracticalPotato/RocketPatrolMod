@@ -9,9 +9,19 @@ class Play extends Phaser.Scene {
         this.load.image("spaceship", "./assets/spaceship.png");
         this.load.image("starfield", "./assets/starfield.png");
         this.load.spritesheet("explosion", "./assets/explosion.png", {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9})
+
+        // load background music
+        this.load.audio("bgm_Zen_Glitch", "./assets/Zen Glitch.mp3");
     }
 
     create() {
+        // create and configure sound objects
+        this.bgm_Zen_Glitch = this.sound.add("bgm_Zen_Glitch", {volume: 0.3, loop: true});
+        this.sfx_explosion = this.sound.add("sfx_explosion", {volume: 0.1});
+        
+        // play bgm
+        this.bgm_Zen_Glitch.play();
+
         // place tile sprite background
         this.starfield = this.add.tileSprite(0, 0, 640, 480, "starfield").setOrigin(0, 0);
         
@@ -81,9 +91,11 @@ class Play extends Phaser.Scene {
 
         // check for restart or to menu after gameover
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.bgm_Zen_Glitch.stop();
             this.scene.restart(this.p1Score);
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.bgm_Zen_Glitch.stop();
             this.scene.start("menuScene");
         }
 
@@ -145,8 +157,6 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = this.p1Score;
 
         // play sound
-        this.sound.play("sfx_explosion");
-        // var explodeSound = this.sound.add("sfx_explosion", {volume: 0.05});
-        // explodeSound.play();
+        this.sfx_explosion.play();
     }
 }

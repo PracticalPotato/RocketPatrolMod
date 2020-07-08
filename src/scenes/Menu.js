@@ -11,6 +11,9 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        // create and configure sound
+        this.sfx_select = this.sound.add("sfx_select", {volume: 0.05});
+
         // menu display
         let menuConfig = {
             fontFamily: "Courier",
@@ -49,12 +52,10 @@ class Menu extends Phaser.Scene {
             // easy mode
             game.settings = {
                 spaceshipSpeed: 3,
-                gameTimer: 60000,
+                gameTimer: 10000, // Remember to convert back to 60k
             }
             // play select sound
-            this.sound.play("sfx_select")
-            // var selectSound = this.sound.add("sfx_select", {volume: 0.05});
-            // selectSound.play();
+            this.sfx_select.play();
             this.scene.start("playScene");
         }
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
@@ -64,9 +65,7 @@ class Menu extends Phaser.Scene {
                 gameTimer: 45000,
             }
             // play select sound
-             this.sound.play("sfx_select")
-            // var selectSound = this.sound.add("sfx_select", {volume: 0.05});
-            // selectSound.play();
+            this.sfx_select.play();
             this.scene.start("playScene");
         }
     }
