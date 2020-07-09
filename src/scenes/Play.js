@@ -98,7 +98,13 @@ class Play extends Phaser.Scene {
 
     update() {
         // scroll tile sprite
-        this.starfield.tilePositionX -= 4;
+        if (keyLEFT.isDown) {
+            this.starfield.tilePositionX -= 5;
+        } else if (keyRIGHT.isDown) {
+            this.starfield.tilePositionX -= 3;
+        } else {
+            this.starfield.tilePositionX -= 4;
+        }
 
         // check for restart or to menu after gameover
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
