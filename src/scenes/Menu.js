@@ -9,14 +9,14 @@ class Menu extends Phaser.Scene {
         this.load.audio("sfx_explosion", "./assets/explosion38.wav");
         this.load.audio("sfx_rocket", "./assets/rocket_shot.wav");
     }
-
+    
     create() {
         // create and configure sound
         this.sfx_select = this.sound.add("sfx_select", {volume: 0.05});
 
         // menu display
         let menuConfig = {
-            fontFamily: "Courier",
+            fontFamily: "Courier New",
             fontSize: "28px",
             backgroundColor: "#F3B141",
             color: "#843605",
@@ -27,6 +27,8 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0,
         }
+
+        this.add.image(game.config.width/2, game.config.height/2, "rocket")
 
         // show menu text
         let centerX = game.config.width/2;
